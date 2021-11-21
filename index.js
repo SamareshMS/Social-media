@@ -1,18 +1,23 @@
 const express = require('express');
 const port = 8000;
+const cookieParser = require('cookie-parser');
 const app = express();
 const expressLayouts = require('express-ejs-layouts');
 // While requiring it will the run the file which is in that path
 const db = require('./config/mongoose');
 
+// To access req.body
+app.use(express.urlencoded());
+app.use(cookieParser());
+
 app.use(express.static('./assets'));
+
+// Set up layout
+app.use(expressLayouts);
 
 // Extract style and scripts from sub pages into the layout
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
-
-// Set up layout
-app.use(expressLayouts);
 
 // use express router
 app.use('/', require('./routes'));
