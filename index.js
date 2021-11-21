@@ -2,7 +2,8 @@ const express = require('express');
 const port = 8000;
 const app = express();
 const expressLayouts = require('express-ejs-layouts');
-
+// While requiring it will the run the file which is in that path
+const db = require('./config/mongoose');
 
 app.use(express.static('./assets'));
 
