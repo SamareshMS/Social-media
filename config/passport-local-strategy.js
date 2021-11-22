@@ -25,7 +25,7 @@ passport.serializeUser(function(user, done){
     return done(null, user.id);
 });
 
-// deserializing the user from the key in cookies
+// deserializing the user from the key in cookies i.e, to find out which user is there
 passport.deserializeUser(function(id, done){
     User.findById(id, function(err, user){
         if(err){
@@ -35,3 +35,24 @@ passport.deserializeUser(function(id, done){
         return done(null, user);
     });
 });
+
+// Check if the user is authenticated if the user is not authenticated he/she can't view the page
+passport.checkAuthentication = function(req, res, next){
+    // If the user is signed in then pass on the request to the controller's action
+    if(req.isAuthenticated()){                // Checks whether the user is signed in or not
+        return next();
+    }
+    // If the user is not signed in
+    return res.redirect('/users/sign-in');
+}
+
+// To set the user for the views
+passport.setAuthenticatedUser = function(req, res, next){
+    if(req.isAuthenticated()){
+        // req.user contains the current signed in user from the session cookie and we are just sending this to the locals for views
+        res.locals.user = req.user;
+    }
+    next();
+}
+
+module.exports = passport;

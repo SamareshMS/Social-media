@@ -8,6 +8,11 @@ module.exports.profile = function(req,res){
 
 // Render the sign up page
 module.exports.signUp = function(req,res){
+
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
+
     res.render('user_sign_up', {
         title: "Sodia | Sign Up"
     });
@@ -15,6 +20,11 @@ module.exports.signUp = function(req,res){
 
 // Render the sign in page
 module.exports.signIn = function(req,res){
+
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
+
     res.render('user_sign_in', {
         title: "Sodia | Sign In"
     });
@@ -48,5 +58,10 @@ module.exports.create = function(req,res){
 
 // Sign in and create a session for user
 module.exports.createSession = function(req,res){
+    return res.redirect('/');
+}
+
+module.exports.destroySession = function(req, res){
+    req.logout();
     return res.redirect('/');
 }

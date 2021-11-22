@@ -9,6 +9,8 @@ const db = require('./config/mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
+// Cookie is getting reset every time after restarting the server. To avoid this we are using connect-mongo
+const MongoStore = require('connect-mongo')(session);
 
 // To access req.body
 app.use(express.urlencoded());
@@ -31,15 +33,24 @@ app.use(session({
     name: 'sodia',
     // TODO change the secret before deployment in production mode
     secret: 'something',
-    saveUninitialized: false,
+    saveUninitialized: false,  //Even if user is not signed in the cookie stores info if the value is given true
     resave: false,
     cookie: {
         maxAge: (1000*60*100)
-    }
+    },
+    store: new MongoStore({
+        mongooseConnection: db,
+        autoRemove: 'disabled'
+    }, function(err){
+        console.log(err || `connect-mongodb setup ok`);
+    })
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+// By this function call the signed in user will be set in the locals
+app.use(passport.setAuthenticatedUser);
 
 // use express router
 app.use('/', require('./routes'));
