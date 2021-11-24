@@ -1,20 +1,18 @@
-<header>
-    page header
+
+<header class="header">
+    <span id="logo">Sodia</span>
+
     <ul>
         <% if(locals.user) {%>
-            <li>
-                <a href="/users/profile"><%= user.name %></a>
-            </li>
-            <li>
-                <a href="/users/sign-out">Sign Out</a>
-            </li>    
-        <%}else {%>
-            <li>
-                <a href="/users/sign-in">Sign In</a>
-            </li>
-            <li>
-                <a href="/users/sign-up">Sign Up</a>
-            </li>
-        <%} %>
+            <span id="logged-in">
+                <li><a href="/users/profile" class="header-link" id="user-name"><%= locals.user.name %></a></li>
+                <a href="/users/sign-out" class="header-link" id="sign-out">Sign Out</a>
+            </span>
+        <%} else {%>
+            <span class="sign-in-sign-up-links">
+                <span class="sign-in-link"><li><a href="/users/sign-in" class="header-link">Sign In</a></li></span>
+                <span class="sign-up-link"><li><a href="/users/sign-up" class="header-link">Sign Up</a></li></span>
+            </span>
+        <%}%>
     </ul>
 </header>

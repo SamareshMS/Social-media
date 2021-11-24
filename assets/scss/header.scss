@@ -1,0 +1,39 @@
+.header{
+    align-items: center;
+    background-image: linear-gradient(to  right, #2F80ED, #2F80ED);
+    // background-image: linear-gradient(to  right, #56CCF2, #2F80ED);
+    color: white;
+    display: flex;
+    font-size: 20px;
+    height: 50px;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+#logo{
+    font-weight: bold;
+}
+
+.header-link{
+    color: white;
+    text-decoration: none;
+}
+
+li{
+    list-style: none;
+}
+
+.sign-in-sign-up-links{
+    display: flex;
+    justify-content: space-between;
+    width: 150px;
+}
+
+#logged-in{
+    display: flex;
+    justify-content: space-between;
+}
+
+#user-name{
+    margin-right: 2rem;
+}
