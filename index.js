@@ -11,6 +11,16 @@ const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 // Cookie is getting reset every time after restarting the server. To avoid this we are using connect-mongo
 const MongoStore = require('connect-mongo')(session);
+const sassMiddleware = require('node-sass-middleware');
+
+// To convert SCSS file to CSS
+app.use(sassMiddleware({
+    src: './assets/scss',
+    dest: './assets/css',
+    debug: true,
+    outputStyle: 'extended',
+    prefix: '/css'
+}));
 
 // To access req.body
 app.use(express.urlencoded());

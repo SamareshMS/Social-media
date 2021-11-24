@@ -3,8 +3,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
 
 // Finding the user and authenticating them
-passport.use(new LocalStrategy({
-        usernameField: 'email'          // In our case email is primary key i.e, unique for each and every user
+passport.use(new LocalStrategy({ 
+        usernameField: 'email'          // In our case email is like primary key i.e, unique for each and every user
     },function(email, password, done){
         User.findOne({email: email}, function(err, user){
             if(err){
