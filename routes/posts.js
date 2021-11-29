@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const postController = require('../controllers/posts_controller');
+const postsController = require('../controllers/posts_controller');
 const passport = require('passport');
 
-router.post('/create', passport.checkAuthentication,  postController.create);
+// passport.checkAuthentication this function is used for those routes which needs the user to be signed in for accessing these routes 
+
+router.post('/create', passport.checkAuthentication,  postsController.create);
+router.get('/destroy/:id', passport.checkAuthentication, postsController.destroy);
 
 module.exports = router;
