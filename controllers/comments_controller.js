@@ -27,8 +27,7 @@ module.exports.destroy = (req,res) => {
       let userId;
         Post.findById(comment.post, (err, post) => {
           userId = post.user;
-        });
-        if(comment.user == req.user.id || userId == req.user.id){
+          if(comment.user == req.user.id || userId == req.user.id){
             let postId = comment.post;
             comment.remove();
             Post.findByIdAndUpdate(postId, {$pull: {comments: req.params.id}}, (err, post) => {
@@ -37,5 +36,7 @@ module.exports.destroy = (req,res) => {
         }else{
             return res.redirect('back');
         }
+        });
+
     })
 }
