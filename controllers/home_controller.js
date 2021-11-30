@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const User = require('../models/user');
 
 module.exports.home = function(req,res){
     //Populate the user of each post
@@ -10,9 +11,15 @@ module.exports.home = function(req,res){
         }
     })
     .populate('user').exec(function(err,posts){
-        return res.render('home', {
-            title: 'Sodia | Home',
-            posts: posts
-        });
+
+        User.find({}, (err, user) => {
+
+            return res.render('home', {
+                title: 'Sodia | Home',
+                posts: posts,
+                all_users: user
+            });
+        })
+
     });
 }

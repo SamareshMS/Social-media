@@ -5,7 +5,7 @@
     <ul>
         <% if(locals.user) {%>
             <span id="logged-in">
-                <li><a href="/users/profile" class="header-link" id="user-name"><%= locals.user.name %></a></li>
+                <li><a href="/users/profile/<%= locals.user.id %>" class="header-link" id="user-name"><%= locals.user.name %></a></li>
                 <a href="/users/sign-out" class="header-link" id="sign-out">Sign Out</a>
             </span>
         <%} else {%>
