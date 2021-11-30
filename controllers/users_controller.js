@@ -10,12 +10,12 @@ module.exports.profile = function(req,res){
 }
 
 module.exports.update = (req,res) => {
-    if(req.users.id == req.params.id){
-        user.findByIdAndUpdate(req.params.id, {name: req.body.name, email: req.body.email}, (err, user) => {
+    if(req.user.id == req.params.id){
+        User.findByIdAndUpdate(req.params.id, {name: req.body.name, email: req.body.email}, (err, user) => {
             return res.redirect('back');
         })
     }else{
-        return res.status(401).send('Unauthorized')
+        return res.status(401).send('Unauthorized');
     }
 }
 
