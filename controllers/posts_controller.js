@@ -2,6 +2,7 @@ const Post = require("../models/post");
 const Comment = require("../models/comment");
 
 module.exports.create = function (req, res) {
+  let ajaxPost;
   Post.create(
     {
       content: req.body.content,
@@ -12,6 +13,16 @@ module.exports.create = function (req, res) {
         console.log(`Error in creating a post`);
         return;
       }
+      ajaxPost = post;
+      if(req.xhr){
+        return res.status(200).json({
+          data: {
+            post: ajaxPost
+          },
+          message: "Post created!!"
+        });
+      }
+
       return res.redirect("back");
     }
   );

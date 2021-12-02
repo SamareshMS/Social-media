@@ -3,7 +3,7 @@ const User = require('../models/user');
 
 module.exports.home = function(req,res){
     //Populate the user of each post
-    Post.find({})
+    Post.find({}).sort('-createdAt')
     .populate({
         path: 'comments',
         populate: {
