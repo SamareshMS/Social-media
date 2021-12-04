@@ -9,6 +9,7 @@ const db = require('./config/mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
+const passportJWT = require('./config/passport-jwt-strategy');
 // Cookie is getting reset every time after restarting the server. To avoid this we are using connect-mongo
 const MongoStore = require('connect-mongo')(session);
 const sassMiddleware = require('node-sass-middleware');
