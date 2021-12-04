@@ -1,3 +1,5 @@
+const { get } = require("http");
+
 {
     // Method to submit the form data for new post using AJAX
     let createPost = () => {
@@ -13,6 +15,7 @@
                 success: data => {
                     let newPost = newPostDom(data.data.post);
                     $('#posts-list-container>ul').prepend(newPost);
+                    deletePost($(' .delete-post-button', newPost));
                 },
                 error: err => {
                     console.log(err.responseText);
@@ -27,7 +30,7 @@
         <p>
           
           <small>
-            <a class="delete-post-button" href="/posts/destroy/${ post.id }">X</a>
+            <a class="delete-post-button" href="/posts/destroy/${ post._id }">X</a>
           </small>
           ${ post.content }
           <br />
@@ -56,6 +59,22 @@
         </div>
       </li>`)
     } 
+
+
+    //method to delete post from DOM
+    let deletePost = deleteLink => {
+      $(deleteLink).click(e => {
+          e.preventDefault();   // Blocks natural behaviour of delete link (X)
+
+          $.ajax({
+            type: 'get',
+            url: $(deleteLink).prop('href'),
+            success: data => {
+              $(`#post-${data.data.post_id}`).remove(); // Since data as an object contains the post._id
+            }
+          })
+      })
+    }
 
 
     createPost();

@@ -3,7 +3,7 @@ const User = require('../models/user');
 
 module.exports.home = function(req,res){
     //Populate the user of each post
-    Post.find({}).sort('-createdAt')
+    Post.find({}).sort('-createdAt')  // It sorts in such a way that the latest post will be on the top
     .populate({
         path: 'comments',
         populate: {

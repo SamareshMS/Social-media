@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const fs = require('fs');
+const path = require('path');
 
 module.exports.profile = function(req,res){
     User.findById(req.params.id, (err, user) => {
@@ -9,13 +11,46 @@ module.exports.profile = function(req,res){
     })
 }
 
-module.exports.update = (req,res) => {
+// module.exports.update = (req,res) => {
+//     if(req.user.id == req.params.id){
+//         User.findByIdAndUpdate(req.params.id, {name: req.body.name, email: req.body.email}, (err, user) => {
+//             return res.redirect('back');
+//         })
+//     }else{
+//         return res.status(401).send('Unauthorized');
+//     }
+// }
+
+module.exports.update = async (req,res) => {
     if(req.user.id == req.params.id){
-        User.findByIdAndUpdate(req.params.id, {name: req.body.name, email: req.body.email}, (err, user) => {
+        try{
+            let user = await User.findById(req.params.id);
+            User.uploadedAvatar(req,res,err => {   //Since the form data is encrypted so we are using this function to decrypt and access the data
+                if(err){
+                    console.log(`Multer err: ${err}`);
+                    return;
+                }
+                user.name = req.body.name;
+                user.email = req.body.email;
+
+                if(req.file){
+                    
+                    if(user.avatar){
+                        // remove the link from the path and the image so that more than one avatar won't be stored
+                        fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+                    }
+                    
+
+                    // This is saving the path of the uploaded file into field in the user
+                    user.avatar = User.avatarPath + '/' + req.file.filename;
+                }
+                user.save();
+                return res.redirect('back');
+            });
+        }catch(err){
+            console.log(err);
             return res.redirect('back');
-        })
-    }else{
-        return res.status(401).send('Unauthorized');
+        }
     }
 }
 
