@@ -17,7 +17,7 @@ let transporter = nodemailer.createTransport({
 // It defines the html email to be sent where the fail will be placed in mailers folder
 let renderTemplate = function(data, relativePath){
     let mailHTML;
-    ejs.renderFile{
+    ejs.renderFile(
         path.join(__dirname, '../views/mailers', relativePath),
         data,
         function(err, template){
@@ -28,7 +28,7 @@ let renderTemplate = function(data, relativePath){
 
             mailHTML = template;
         }
-    }
+    )
 }
 
 module.exports = {
