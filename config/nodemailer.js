@@ -33,5 +33,5 @@ let renderTemplate = function(data, relativePath){
 
 module.exports = {
     transporter: transporter,
-    renderTemplate: renderTemplate
+    renderTemplate: renderTemplate2
 }
