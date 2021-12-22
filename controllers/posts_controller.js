@@ -1,5 +1,6 @@
 const Post = require("../models/post");
 const Comment = require("../models/comment");
+const postMailer = require('../mailers/posts_mailer');
 
 module.exports.create = function (req, res) {
   let ajaxPost;
@@ -9,6 +10,7 @@ module.exports.create = function (req, res) {
       user: req.user._id,
     },
     function (err, post) {
+
       if (err) {
         console.log(`Error in creating a post`);
         return;
@@ -22,6 +24,9 @@ module.exports.create = function (req, res) {
           message: "Post created!!"
         });
       }
+
+      let userPost = post.populate('user');
+      postMailer.newPost(userPost);
 
       return res.redirect("back");
     }
