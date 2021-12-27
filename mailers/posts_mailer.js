@@ -6,7 +6,7 @@ exports.newPost = (post) => {
     console.log('*****************',post);
     nodeMailer.transporter.sendMail({
         from: 'sodiaweb@gmail.com',
-        to: 'samareshms2002@gmail.com',
+        to: post.user.email,
         subject: 'New post Published!!!',
         html: htmlString,
     }, (err, info) => {
