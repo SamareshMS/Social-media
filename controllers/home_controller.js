@@ -1,9 +1,9 @@
 const Post = require('../models/post');
 const User = require('../models/user');
 
-module.exports.home = function(req,res){
+module.exports.home = async function(req,res){
     //Populate the user of each post
-    Post.find({}).sort('-createdAt')  // It sorts in such a way that the latest post will be on the top
+    let posts = Post.find({}).sort('-createdAt')  // It sorts in such a way that the latest post will be on the top
     .populate({
         path: 'comments',
         populate: {

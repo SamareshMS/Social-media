@@ -1,4 +1,3 @@
-const { get } = require("http");
 
 {
     // Method to submit the form data for new post using AJAX
@@ -14,8 +13,9 @@ const { get } = require("http");
                 data: newPostForm.serialize(), // This converts the form data into json format
                 success: data => {
                     let newPost = newPostDom(data.data.post);
+                    // To display the post at the topmost part of posts list we prepend to posts-list
                     $('#posts-list-container>ul').prepend(newPost);
-                    deletePost($(' .delete-post-button', newPost));
+                    deletePost($(' .delete-post-button', newPost)); // since the delete button has to be inside the new post
                 },
                 error: err => {
                     console.log(err.responseText);
@@ -25,7 +25,7 @@ const { get } = require("http");
     }
 
     // Method to create a post in DOM
-    let newPostDom = post => {
+    let newPostDom = (post) => {
         return $(`<li id="post-${post._id}">
         <p>
           
@@ -36,7 +36,7 @@ const { get } = require("http");
           <br />
           <small> ${ post.user.name } </small>
         </p>
-        <div class="post-comments">
+        <div class="post-comments"> 
 
           <form action="/comments/create" method="POST">
             <input
@@ -57,20 +57,23 @@ const { get } = require("http");
             </ul>
           </div>
         </div>
-      </li>`)
+      </li>`);
     } 
 
 
     //method to delete post from DOM
     let deletePost = deleteLink => {
-      $(deleteLink).click(e => {
-          e.preventDefault();   // Blocks natural behaviour of delete link (X)
+      $(deleteLink).click(function(e) {
+          e.preventDefault();   // Blocks natural behavior of delete link (X)
 
           $.ajax({
             type: 'get',
             url: $(deleteLink).prop('href'),
             success: data => {
               $(`#post-${data.data.post_id}`).remove(); // Since data as an object contains the post._id
+            },
+            error: function(error){
+              console.log(error.responseText);
             }
           })
       })
