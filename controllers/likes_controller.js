@@ -15,7 +15,7 @@ module.exports.toggleLike = async (req,res) => {
          }
 
          // Check if a like already exists
-         let existingLike = await like.findOne({
+         let existingLike = await Like.findOne({
              likeable: req.query.id,
              onModel: req.query.type,
              user: req.user._id
@@ -27,13 +27,13 @@ module.exports.toggleLike = async (req,res) => {
             likeable.save();
 
             existingLike.remove();
-            deleted = true
+            deleted = true;
          }
          // Else make a new like
          else{
             let newLike = await Like.create({
                 user: req.user._id,
-                likable: req.query.id,
+                likeable: req.query.id,
                 onModel: req.query.type
             });
 

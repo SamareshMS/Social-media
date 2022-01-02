@@ -1,12 +1,29 @@
-<h1>Sign In</h1>
+<link rel="stylesheet" href="/css/sign_in.css">
+<div class="login-page">
+    <div class="form">
+      <div class="login">
+        <div class="login-header">
+          <h3>SIGN IN</h3>
+          <p>Please enter your credentials to login.</p>
+        </div>
+      </div>
+      
 
-<form action="/users/create-session" method="POST">
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <input type="submit" value="Sign In">
-</form>
+      <form action="/users/create-session" class="login-form" method="POST">
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="submit" class="btn btn-outline-secondary" style="letter-spacing: 0.2em;" value="log in">
+    </form>
+    <p>
+        <a href="/users/auth/google">Google Sign In/Sign up</a>
+    </p>
+    <p class="message">Not registered? <a href="/users/sign-up">Create an account</a></p>
+      
+    </div>
+  </div>
 
 
-<p>
-    <a href="/users/auth/google">Google Sign In/Sign up</a>
-</p>
+
+
+
+

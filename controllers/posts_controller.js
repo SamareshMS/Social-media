@@ -1,6 +1,7 @@
 const Post = require("../models/post");
 const Comment = require("../models/comment");
 const postMailer = require('../mailers/posts_mailer');
+const Like = require('../models/like');
 
 // module.exports.create = function (req, res) {
 //   let ajaxPost;
@@ -66,6 +67,11 @@ module.exports.destroy = async function (req, res) {
     let post = await Post.findById(req.params.id)
       // .id converting the object id into string it is good while comparing
       if (post.user == req.user.id) {
+
+        //Deleting likes associated with posts
+        await Like.deleteMany({likeable: post, onModel: 'Post'});
+        await Like.deleteMany({_id: {$in: post.comments}});
+
         post.remove();
   
         await Comment.deleteMany({ post: req.params.id });
