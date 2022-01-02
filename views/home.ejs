@@ -1,5 +1,8 @@
 <link rel="stylesheet" href="/css/home.css">
-
+<% if(!locals.user){%>
+  <a href="/users/sign-in">Sign in</a>
+  <a href="/users/sign-up">Sign up</a>  
+<%} %>
 <div id="home-container">
   <section id="feed-posts">
     <h4>Posts</h4>
