@@ -14,4 +14,13 @@
 <%}else{%>
     <p>Name: <%= profile_user.name %></p>
     <p>Name: <%= profile_user.email %></p>
+
+    <a href="/friendship/toggle/<%=profile_user._id%>">
+        <button type="submit">
+            Add Friend
+        </button>
+
+
+
+    </a>
 <%} %>
