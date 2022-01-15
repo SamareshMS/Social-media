@@ -1,2 +1,22 @@
 body {
-  background-color: lightblue; }
+  background-image: linear-gradient(#00d2ff, #928DAB); }
+
+.dp {
+  border-radius: 50%;
+  height: 10vw;
+  width: 10vw; }
+
+#user-profile-container {
+  width: auto;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80px; }
+
+#change-dp {
+  margin-top: 4vh;
+  margin-left: 115px; }
+
+.form-group {
+  margin-top: 10px; }

@@ -1,8 +1,9 @@
+<link rel="stylesheet" href="/scss/_comment.scss">
 <li id="comment-<%= comment._id %>">
     <p>
         <% if((locals.user) && (locals.user.id == comment.user.id||post.user.id == locals.user.id)) {%>
             <small>
-              <a href="/comments/destroy/<%= comment.id %>">X</a>
+              <a href="/comments/destroy/<%= comment.id %>"><i class="far fa-trash-alt"></i></a>
             </small>
             <%}%> 
         <%= comment.content %>
@@ -12,10 +13,10 @@
         <small>
           <% if(locals.user){%>
             <a class="toggle-like-button" data-likes="<%= comment.likes.length %>" href="/likes/toggle/?id=<%=comment._id%>&type=Comment">
-              <%= comment.likes.length %> Likes
+              <%= comment.likes.length %> <span class="like"><i class="fas fa-heart"></i></span>
             </a>
             <% }else{ %>
-              <%= comment.likes.length %> Likes
+              <%= comment.likes.length %> <span class="like"><i class="fas fa-heart"></i></span>
           <% } %>
         </small>
       </p>

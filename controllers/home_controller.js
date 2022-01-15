@@ -3,6 +3,11 @@ const User = require('../models/user');
 
 module.exports.home = async function(req,res){
     try{
+
+        if(!req.user){
+            return res.redirect('/users/sign-in');
+        }
+
           //Populate the user of each post
         let posts = await Post.find({})
         .sort('-createdAt')// It sorts in such a way that the latest post will be on the top

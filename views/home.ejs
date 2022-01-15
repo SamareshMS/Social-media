@@ -2,24 +2,31 @@
     
 <div id="home-container">
     <section id="feed-posts">
-        <h4>Posts</h4>
-         <!-- Show this form if user is signed in -->
-        <% if(locals.user){ %>  
-            <form action="/posts/create" id="new-post-form" method="POST">
-                <textarea name="content" cols="30" rows="3" placeholder="Type Here..." required></textarea>
-                <input type="submit" value="Post">
-            </form>
-        <% } %>
-        
-
-        <div id="posts-list-container">
-                <ul>
-                    <% for(post of posts){ %>
-                        
-                    <%- include('_post') -%>
-                        
-                    <%} %>
-                </ul>
+        <div id="posts-container">
+            <h4>Posts</h4>
+            <!-- Show this form if user is signed in -->
+           <% if(locals.user){ %>  
+   
+               <div class="form-group">
+                   <form action="/posts/create" id="new-post-form" method="POST">
+                       <textarea name="content" rows="3" class="form-control" placeholder="Type Here..." id="post-input" required id="exampleFormControlTextarea1"></textarea>
+                       <input type="submit" class="btn btn-outline-secondary value="Post">
+                   </form>
+                 </div>
+   
+   
+           <% } %>
+           
+   
+           <div id="posts-list-container">
+                   <ul>
+                       <% for(post of posts){ %>
+                           
+                       <%- include('_post') -%>
+                           
+                       <%} %>
+                   </ul>
+           </div>
         </div>
 
     </section>
@@ -60,9 +67,9 @@
         <div id="users">
             <h4>Users</h4>
             <% for(u of all_users){%>
-                <p>
-                    <a href="/users/profile/<%= u.id %>"><%= u.name %></a>
-                </p>
+                    <p>
+                        <a href="/users/profile/<%= u.id %>"><%= u.name %></a>
+                    </p>    
             <% } %>
         </div>
     </section>
@@ -79,3 +86,14 @@
         let toggleLike = new ToggleLike(self);
     });
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+<script src="/js/chat_engine.js"></script>
+
+<% if(locals.user){%>
+    <script>
+        console.log('heyyyy');
+        //  initializing ChatEngine class
+        new ChatEngine('user-chat-box', '<%= locals.user.email %>');
+    </script>    
+<%} %>

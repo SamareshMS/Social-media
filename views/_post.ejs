@@ -1,8 +1,9 @@
+<link rel="stylesheet" href="/scss/_post.scss">
 <li id="post-<%= post._id %>">
     <p>
       <% if(locals.user && locals.user.id == post.user.id) {%>
       <small>
-        <a class="delete-post-button" href="/posts/destroy/<%= post.id %>">X</a>
+        <a class="delete-post-button" href="/posts/destroy/<%= post.id %>"><i class="far fa-trash-alt"></i></a>
       </small>
       <%}%>
        <%= post.content %>
@@ -12,10 +13,10 @@
       <small>
         <% if(locals.user){%>
           <a class="toggle-like-button" data-likes="<%= post.likes.length %>" href="/likes/toggle/?id=<%=post._id%>&type=Post">
-            <%= post.likes.length %> Likes
+            <%= post.likes.length %> <span class="like"><i class="fas fa-heart"></i></span>
           </a>
         <%} else{%>
-          <%= post.likes.length %> Likes  
+          <%= post.likes.length %> <span class="like"><i class="fas fa-heart"></i></span>  
         <%} %>
       </small>
     </p>

@@ -1,11 +1,27 @@
+body {
+  background-image: linear-gradient(90deg, #8e9eab, #eef2f3); }
+
 #home-container {
   display: flex;
   height: 97%; }
   #home-container #feed-posts {
     width: 70%;
-    padding: 10px; }
+    padding: 10px;
+    display: flex;
+    flex-direction: column; }
   #home-container #user-friends {
     padding: 10px;
     width: 30%;
     border-left: 1px solid lightgrey;
     height: 100%; }
+
+#users-container {
+  display: flex; }
+
+#post-input {
+  width: 22vw;
+  background: #ece9e6; }
+
+#posts-container {
+  margin-left: 100px;
+  margin-top: 20px; }
