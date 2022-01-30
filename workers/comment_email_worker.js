@@ -1,5 +1,4 @@
 const queue = require('../config/kue');
-
 const commentsMailer = require('../mailers/comments_mailer');
 
 // This sends the emails for us instead of sending emails via comments_controller

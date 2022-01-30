@@ -1,14 +1,14 @@
 <link rel="stylesheet" href="/scss/_post.scss">
-<li id="post-<%= post._id %>">
+<li id="post-<%= post._id %>" class="displayed-post">
     <p>
       <% if(locals.user && locals.user.id == post.user.id) {%>
       <small>
         <a class="delete-post-button" href="/posts/destroy/<%= post.id %>"><i class="far fa-trash-alt"></i></a>
       </small>
       <%}%>
-       <%= post.content %>
+       <span id="posted-content"><%= post.content %></span>
       <br />
-      <small> <%= post.user.name %> </small>
+      <small class="post-user-name"> <%= post.user.name %> </small>
       <br>
       <small>
         <% if(locals.user){%>
@@ -22,11 +22,17 @@
     </p>
     <div class="post-comments">
       <% if (locals.user){ %>
-      <form id="post-<%= post._id %>-comments-form" action="/comments/create" method="POST">
-        <input type="text" name="content" placeholder="Type Here to add comment..." required/>
+      <form id="post-<%= post._id %>-comments-form" class="form-for-comments" action="/comments/create" method="POST">
+        <!-- <input type="text" name="content" placeholder="Type Here to add comment..." required/>
         <input type="hidden" name="post" value="<%= post._id %>" />
-        <input type="submit" value="Add Comment" />
+        <input type="submit" value="Add Comment" /> -->
+
+        <input type="text" style="margin-top: 9px;" class="form-control" name="content" id=" inputPassword2" placeholder="Type Here to add comment..." required>
+        <input type="hidden" name="post" value="<%= post._id %>" />
+        <input type="submit" id="comment-submit" value= ">" />
       </form>
+
+
 
       <% } %>
 

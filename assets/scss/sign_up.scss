@@ -73,13 +73,28 @@ margin-bottom: 26px;
 }
 
 body {
-  background-color: #328f8a;
-  background-image: linear-gradient(45deg,#e96443,#904e95);
+  background-color: 84DFFF;
+  // background-image: linear-gradient(45deg,#e96443,#904e95);
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 h3{
-    margin-top: 6%;
+    margin-top: -13px;
+}
+
+.form {
+  position: relative;
+  z-index: 1;
+  background: white;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+#credentials-submit{
+  background-color: palegreen;
 }

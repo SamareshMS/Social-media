@@ -19,10 +19,14 @@ class PostComments{
 
 
     createComment(postId){
+        console.log('this', this);
+
         let pSelf = this;
         this.newCommentForm.submit(function(e){
             e.preventDefault();
             let self = this;
+
+            console.log('*********** inside create comment');
 
             $.ajax({
                 type: 'post',
@@ -52,18 +56,21 @@ class PostComments{
                         <p>
                             
                             <small>
-                                <a class="delete-comment-button" href="/comments/destroy/${comment._id}">X</a>
+                                <a href="/comments/destroy/${ comment.id }"><i class="far fa-trash-alt"></i></a>
                             </small>
                             
-                            ${comment.content}
+                            
+                            <span id="displayed-comment">${comment.content}</span>
                             <br>
-                            <small>
-                                ${comment.user.name}
-                            </small>
-                            <small>
                             
-                                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment">
-                                    0 Likes
+                            <small id="displayed-comment-writer"> ${comment.user.name} </small>
+                            <small>
+                            <br>
+                            
+                                <a class="toggle-like-button" data-likes="${comment.likes.length }" href="/likes/toggle/?id=${comment._id}&type=Comment">
+                                
+                                ${ comment.likes.length } <span class="like"><i class="fas fa-heart"></i></span>
+                                
                                 </a>
                             
                             </small>

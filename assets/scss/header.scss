@@ -1,7 +1,8 @@
 .header{
     align-items: center;
-    background-image: linear-gradient(to  right, #2F80ED, #2F80ED);
-    // background-image: linear-gradient(to  right, #56CCF2, #2F80ED);
+    // background-image: linear-gradient(to  right, #2F80ED, #2F80ED);
+    // background-color: #005AA7;
+    background-color: 1572A1;
     color: white;
     display: flex;
     font-size: 20px;
@@ -26,14 +27,20 @@ li{
 .sign-in-sign-up-links{
     display: flex;
     justify-content: space-between;
+    color: black;
     width: 150px;
 }
 
 #logged-in{
     display: flex;
+    margin-top: 10px;
     justify-content: space-between;
 }
 
 #user-name{
     margin-right: 2rem;
+}
+
+a:hover{
+    color: white;
 }

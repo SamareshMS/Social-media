@@ -1,62 +1,35 @@
 <link rel="stylesheet" href="/css/home.css">
     
 <div id="home-container">
-    <section id="feed-posts">
-        <div id="posts-container">
-            <h4>Posts</h4>
-            <!-- Show this form if user is signed in -->
-           <% if(locals.user){ %>  
-   
-               <div class="form-group">
-                   <form action="/posts/create" id="new-post-form" method="POST">
-                       <textarea name="content" rows="3" class="form-control" placeholder="Type Here..." id="post-input" required id="exampleFormControlTextarea1"></textarea>
-                       <input type="submit" class="btn btn-outline-secondary value="Post">
-                   </form>
-                 </div>
-   
-   
-           <% } %>
-           
-   
-           <div id="posts-list-container">
-                   <ul>
-                       <% for(post of posts){ %>
-                           
-                       <%- include('_post') -%>
-                           
-                       <%} %>
-                   </ul>
-           </div>
-        </div>
 
-    </section>
 
     <section id="users-container">
         <!-- If user is signed in then show his/her friends -->
         <% if(locals.user){ %>
         <div id="users-friends">
-            <h4>Friends</h4>
+            <h4 class="home-headers" style="margin-left: 3vw;">Friends</h4>
 
             <% for(friend of logged_in_user.friendships){%>
                 <!-- if User himself had sent the request -->
                 <% if(locals.user.id == friend.from_user.id){ %>
                     <!-- then friend details are in to_user object -->
                     <p id="friend-<%= friend.to_user.id %>" class="friends-of-user">
-                        <a href="/users/profile/<%= friend.to_user.id %>"><%= friend.to_user.name %></a>
+                        <a class="friends-shown" href="/users/profile/<%= friend.to_user.id %>"><%= friend.to_user.name %></a>
                         <a class="remove-friend-button" href="/friendship/toggle/<%= friend.to_user.id %>">
-                            <button type="button">
+                            <!-- <button type="button">
                                 Delete friend
-                            </button>
+                            </button> -->
+                            <br>
+                            <button type="button" id="delete-friend-button" class="btn btn-primary">Remove friend</button>
                         </a>
                     </p>
                     <% }else{ %>
                         <!-- then friend details are in from_user object -->
                         <p id="friend-<%= friend.from_user.id %>" class="friends-of-user">
-                            <a href="/users/profile/<%= friend.from_user.id %>"><%= friend.from_user.name %></a>
+                            <a class="friends-shown" href="/users/profile/<%= friend.from_user.id %>"><%= friend.from_user.name %></a>
                             <a class="remove-friend-button" href="/friendship/toggle/<%= friend.from_user.id %>">
-                                <button type="button">
-                                    Delete friend
-                                </button>
+                                <br>
+                                <button type="button" id="delete-friend-button" class="btn btn-primary">Remove friend</button>
                             </a>
                         </p>
                     <% } %>
@@ -64,11 +37,39 @@
         </div>
         <% } %>
 
+        <section id="feed-posts">
+            <div id="posts-container">
+                <h4 style="margin-left: 3vw;" class="home-headers" id="post-header">Publish a post</h4>
+                <!-- Show this form if user is signed in -->
+               <% if(locals.user){ %>  
+                    
+                   <div class="form-group">
+                       <form style="margin-left: 3vw;" action="/posts/create" id="new-post-form" method="POST">
+                           <textarea name="content" rows="3" class="form-control" id="post-input" placeholder="Type Here..." id="post-input" required id="exampleFormControlTextarea1"></textarea>
+                           <input type="submit" id="post-submit" value="Post">
+                       </form>
+                     </div>
+       
+       
+               <% } %>
+               
+       
+               <div id="posts-list-container">
+                       <ul>
+                           <% for(post of posts){ %>
+                           <%- include('_post') -%>
+                           <%} %>
+                       </ul>
+               </div>
+            </div>
+    
+        </section>
+
         <div id="users">
-            <h4>Users</h4>
+            <h4 class="home-headers">Users</h4>
             <% for(u of all_users){%>
                     <p>
-                        <a href="/users/profile/<%= u.id %>"><%= u.name %></a>
+                        <a class="user-shown" href="/users/profile/<%= u.id %>"><%= u.name %></a>
                     </p>    
             <% } %>
         </div>
@@ -92,8 +93,6 @@
 
 <% if(locals.user){%>
     <script>
-        console.log('heyyyy');
-        //  initializing ChatEngine class
         new ChatEngine('user-chat-box', '<%= locals.user.email %>');
     </script>    
 <%} %>

@@ -11,7 +11,14 @@ module.exports.home = async function(req,res){
           //Populate the user of each post
         let posts = await Post.find({})
         .sort('-createdAt')// It sorts in such a way that the latest post will be on the top
-        .populate('user')  
+        .populate({
+            path: 'user',
+            populate: [
+                {
+                    path: 'friendships'
+                }
+            ]
+        })  
         .populate({
             path: 'comments',
             populate: [
@@ -23,6 +30,8 @@ module.exports.home = async function(req,res){
                 }
             ]
         }).populate('likes'); // This is for the likes which belongs to posts
+
+        console.log('!!!!!!!!!!!!!!',posts[0].user.friendships[0].to_user)
 
         let users = await User.find({});
 

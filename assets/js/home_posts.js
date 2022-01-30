@@ -34,36 +34,35 @@
 
     // Method to create a post in DOM
     let newPostDom = function(post) {
-        return $(`<li id="post-${post._id}">
+        return $(`<li id="post-${post._id}" class="displayed-post">
         <p>
           
           <small>
-            <a class="delete-post-button" href="/posts/destroy/${ post._id }">X</a>
+            <a class="delete-post-button" href="/posts/destroy/${post.id}"><i class="far fa-trash-alt"></i></a>
           </small>
-          ${ post.content }
+          <span id="posted-content">${ post.content }</span>
           <br>
-          <small> ${ post.user.name } </small>
+          <small class="post-user-name"> ${ post.user.name }</small>
           <br>
           <small>
-            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post">
-                0 Likes
-            </a>
+            <a class="toggle-like-button" data-likes="${ post.likes.length }" href="/likes/toggle/?id=${post._id}&type=Post">
+            ${ post.likes.length } <span class="like"><i class="fas fa-heart"></i></span>
+          </a>
           </small>
 
         </p>
         <div class="post-comments"> 
 
-        <form id="post-${ post._id }-comments-form" action="/comments/create" method="POST">
-        <input type="text" name="content" placeholder="Type Here to add comment..." required>
-        <input type="hidden" name="post" value="${ post._id }" >
-        <input type="submit" value="Add Comment">
+        <form id="post-${ post._id }-comments-form" class="form-for-comments" action="/comments/create" method="POST">
+
+      <input type="text" style="margin-top: 9px;" class="form-control" name="content" id=" inputPassword2" placeholder="Type Here to add comment..." required>
+        <input type="hidden" name="post" value="value="${post._id}" />
+        <input type="submit" id="comment-submit" value= ">" />
     </form>
     
-
-    
-          <div class="post-comments-list">
-            <ul id="post-comments-${ post._id }">
                 
+            <div class="post-comments-list">
+            <ul id="post-comments-${ post._id }">
             </ul>
           </div>
         </div>
@@ -73,6 +72,8 @@
 
     //method to delete post from DOM
     let deletePost = function(deleteLink) {
+      console.log('deleteLink', deleteLink);
+      console.log('delete link', $(deleteLink).prop('href'))
       $(deleteLink).click(function(e) {
           e.preventDefault();   // Blocks natural behavior of delete link (X)
 
@@ -89,6 +90,29 @@
       });
     }
 
+    
+
 
     createPost();
+
+    let postToAjax=function()
+    {
+        // console.log("post to ajax");
+        $("#posts-list-container>ul>li").each(function()
+        {
+            let self=$(this);
+            console.log('self',self)
+            let deletebutton = $(".delete-post-btn", self);
+            // let editbutton = $(" .edit-post-btn",self);
+            console.log('****************** Delete button', deletebutton);
+            deletePost(deletebutton);
+            // editPost(editbutton);
+
+            // get the post's id by splitting the id attribute
+            let postId = self.prop('id').split("-")[1];
+            new PostComments(postId);
+        })
+    }
+    postToAjax();
 }
+

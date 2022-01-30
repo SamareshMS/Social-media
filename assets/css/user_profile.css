@@ -12,7 +12,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 80px; }
+  margin-top: 80px;
+  margin-bottom: 132px;
+  min-height: 57vh; }
 
 #change-dp {
   margin-top: 4vh;
