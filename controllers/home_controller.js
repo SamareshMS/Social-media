@@ -31,7 +31,7 @@ module.exports.home = async function(req,res){
             ]
         }).populate('likes'); // This is for the likes which belongs to posts
 
-        console.log('!!!!!!!!!!!!!!',posts[0].user.friendships[0].to_user)
+        // console.log('!!!!!!!!!!!!!!',posts[0].user.friendships[0].to_user)
 
         let users = await User.find({});
 
