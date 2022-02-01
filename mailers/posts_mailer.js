@@ -5,7 +5,7 @@ exports.newPost = (post) => {
     let htmlString = nodeMailer.renderTemplate({post: post}, '/posts/new_post.ejs');
     console.log('*****************',post);
     nodeMailer.transporter.sendMail({
-        from: 'sodiaweb@gmail.com',
+        from: 'mssamaresh34@gmail.com',
         to: post.user.email,
         subject: 'New post Published!!!',
         html: htmlString,

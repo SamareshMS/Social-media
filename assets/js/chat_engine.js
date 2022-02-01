@@ -1,10 +1,10 @@
 // This class is going to send a request for the connection
 
 class ChatEngine{
-    constructor(chatBoxId, userEmail){
+    constructor(chatBoxId, userEmail, userName){
         this.chatBox = $(`#${chatBoxId}`);
         this.userEmail = userEmail;
-
+        this.userName = userName;
         // as soon as the class is initialized the connection request is sent
         // io.connect() fires an event called connection which is used in the server (in chat_socket file)
         this.socket = io.connect('http://localhost:5000');
@@ -26,6 +26,7 @@ class ChatEngine{
         // User sending the req to join the room
         self.socket.emit('join_room', {
             user_email: self.userEmail,
+            user_name:self.userName,
             chatroom: 'sodia'
         });
 
@@ -33,13 +34,21 @@ class ChatEngine{
             console.log('a user joined!', data);
         })
 
+        let msgArray = [];
         $(`#send-message`).click(function(){
             let msg = $('#chat-message-input').val();
+            let messageAndTime = {
+                msg: msg,
+                time: Date.now()
+            }
+            msgArray.push(messageAndTime);
+            localStorage.setItem("message",JSON.stringify(msgArray))
             if(msg!='')
             {
                 self.socket.emit('send_message', {
                     message: msg,
                     user_email: self.userEmail,
+                    user_name: self.userName,
                     chatroom: 'sodia'
                 });
             }
@@ -52,7 +61,7 @@ class ChatEngine{
             
             let messageType = 'other-message';
 
-            if(data.user_email == self.userEmail){
+            if(data.user_name == self.userName){
                 messageType = 'self-message';
             }
 
@@ -61,12 +70,16 @@ class ChatEngine{
             }));
 
             newMessage.append($('<sub>', {
-                'html': data.user_email
+                'html': data.user_name
             }));
+
 
             newMessage.addClass(messageType);
 
             $('#chat-messages-list').append(newMessage);
+            console.log('%%%%%%%%%%%%%%%%%%%',$('#chat-messages-list')) ;
         })
     }
 }
+
+

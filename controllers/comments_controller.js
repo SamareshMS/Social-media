@@ -52,7 +52,7 @@ module.exports.create = async function (req, res) {
 module.exports.destroy = async function(req,res){
     try{
       let comment = await Comment.findById(req.params.id);
-
+      // console.log('@@@@@@@@@@@@@',req.params.id);
 
       
         let userId;
