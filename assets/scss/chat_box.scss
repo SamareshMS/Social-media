@@ -46,6 +46,7 @@
 	// padding: 15px;
 	background-color: #ffa0a0;
 	margin-top: 5px;
+	word-break: break-all;
 }
 
 #chat-messages-list{
@@ -54,9 +55,9 @@
 	height: 70%;
 	background-color: white;
 	// overflow: auto;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
+	// display: flex;
+	// flex-direction: column;
+	// align-items: flex-start;
 
 }
 
@@ -67,5 +68,6 @@
     background-color: #a0dcff;
 	order: 2;
 	margin-top: 5px;
+	word-break: break-all;
 	align-self: flex-end;
 }

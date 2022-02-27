@@ -8,7 +8,7 @@
       <%}%>
        <span id="posted-content"><%= post.content %></span>
       <br />
-      <small class="post-user-name"> <%= post.user.name %> </small>
+      <small class="post-user-name"> <a href="/users/profile/<%= post.user.id %>"><%= post.user.name %></a> </small>
       <br>
       <small>
         <% if(locals.user){%>

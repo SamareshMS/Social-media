@@ -9,7 +9,7 @@
             <%}%> 
         <span id="displayed-comment"><%= comment.content %></span>
         <br />
-        <small id="displayed-comment-writer"> <%= comment.user.name %> </small>
+        <small id="displayed-comment-writer"> <a href="/users/profile/<%= comment.user.id %>"><%= comment.user.name %></a> </small>
             <br>
         <small>
           <% if(locals.user){%>
