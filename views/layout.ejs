@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="/css/layout.css">
         <link rel="stylesheet" href="/css/header.css">
         <link rel="stylesheet" href="/css/footer.css">
-
+        <link rel="icon" type="image/x-icon" href="/images/logo.png">
         <%- style %>
     </head>
     <body>
@@ -19,12 +19,13 @@
         
 
         <main id="layout-main">
+            <!-- body is pre defined by the library -->
             <%- body -%>
         </main>
 
-        <%if(locals.user){%>
+        <!-- <%if(locals.user){%> -->
             <!-- <%- include('_footer'); %>    -->
-        <%}%>
+        <!-- <%}%> -->
         
 
         <%- script %>

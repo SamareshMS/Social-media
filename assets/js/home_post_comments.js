@@ -1,6 +1,5 @@
 
 
-// this class would be initialized for every post on the page
 class PostComments{
     // constructor is used to initialize the instance of the class whenever a new instance is created
     constructor(postId){
@@ -19,14 +18,10 @@ class PostComments{
 
 
     createComment(postId){
-        console.log('this', this);
-
         let pSelf = this;
         this.newCommentForm.submit(function(e){
             e.preventDefault();
             let self = this;
-
-            console.log('*********** inside create comment');
 
             $.ajax({
                 type: 'post',
@@ -37,8 +32,9 @@ class PostComments{
                     $(`#post-comments-${postId}`).prepend(newComment);
                     pSelf.deleteComment($(' .delete-comment-button', newComment));
 
-                    // enable the functionality of the toggle like button on the new comment
+                    // CHANGE :: enable the functionality of the toggle like button on the new comment
                     new ToggleLike($(' .toggle-like-button', newComment));
+
                 }, error: function(error){
                     console.log(error.responseText);
                 }
@@ -50,28 +46,29 @@ class PostComments{
 
 
     newCommentDom(comment){
-        // show the count of zero likes on this comment
+        // CHANGE :: show the count of zero likes on this comment
 
         return $(`<li id="comment-${ comment._id }">
                         <p>
                             
                             <small>
-                                <a href="/comments/destroy/${ comment.id }"><i class="far fa-trash-alt"></i></a>
+                                <a class="delete-comment-button" href="/comments/destroy/${comment._id}"><i class="far fa-trash-alt"></i></a>
                             </small>
                             
-                            
                             <span id="displayed-comment">${comment.content}</span>
-                            <br>
                             
-                            <small id="displayed-comment-writer"> ${comment.user.name} </small>
+                            <br>
                             <small>
+                            <small id="displayed-comment-writer"> <a href="/users/profile/${ comment.user._id }">${comment.user.name}</a> </small>
+                                
+                            </small>
+
                             <br>
+                            <small>
                             
-                                <a class="toggle-like-button" data-likes="${comment.likes.length }" href="/likes/toggle/?id=${comment._id}&type=Comment">
-                                
-                                ${ comment.likes.length } <span class="like"><i class="fas fa-heart"></i></span>
-                                
-                                </a>
+                            <a class="toggle-like-button" data-likes="${ comment.likes.length }" href="/likes/toggle/?id=${comment._id}&type=Comment">
+                            ${ comment.likes.length } <span class="like"><i class="fas fa-heart"></i></span>
+                          </a>
                             
                             </small>
 
@@ -84,7 +81,7 @@ class PostComments{
     deleteComment(deleteLink){
         $(deleteLink).click(function(e){
             e.preventDefault();
-
+            console.log($(deleteLink).prop('href'))
             $.ajax({
                 type: 'get',
                 url: $(deleteLink).prop('href'),

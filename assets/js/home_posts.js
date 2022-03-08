@@ -13,6 +13,7 @@
                 data: newPostForm.serialize(), // This converts the form data into json format
                 success: function(data) {
                     let newPost = newPostDom(data.data.post);
+                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!',newPost)
                     // To display the post at the topmost part of posts list we prepend to posts-list
                     $('#posts-list-container>ul').prepend(newPost);
 
@@ -38,11 +39,11 @@
         <p>
           
           <small>
-            <a class="delete-post-button" href="/posts/destroy/${post.id}"><i class="far fa-trash-alt"></i></a>
+            <a class="delete-post-button" href="/posts/destroy/${post._id}"><i class="far fa-trash-alt"></i></a>
           </small>
           <span id="posted-content">${ post.content }</span>
           <br>
-          <small class="post-user-name"> ${ post.user.name }</small>
+          <small class="post-user-name"> <a href="/users/profile/${ post.user._id }">${ post.user.name }</a> </small>
           <br>
           <small>
             <a class="toggle-like-button" data-likes="${ post.likes.length }" href="/likes/toggle/?id=${post._id}&type=Post">
@@ -53,12 +54,11 @@
         </p>
         <div class="post-comments"> 
 
-        <form id="post-${ post._id }-comments-form" class="form-for-comments" action="/comments/create" method="POST">
-
-      <input type="text" style="margin-top: 9px;" class="form-control" name="content" id=" inputPassword2" placeholder="Type Here to add comment..." required>
-        <input type="hidden" name="post" value="value="${post._id}" />
+        <form id="post-${post._id }-comments-form" class="form-for-comments" action="/comments/create" method="POST">
+        <input type="text" style="margin-top: 9px;" class="form-control" name="content" id=" inputPassword2" placeholder="Type Here to add comment..." required>
+        <input type="hidden" name="post" value="${post._id}" />
         <input type="submit" id="comment-submit" value= ">" />
-    </form>
+      </form>
     
                 
             <div class="post-comments-list">
@@ -72,8 +72,8 @@
 
     //method to delete post from DOM
     let deletePost = function(deleteLink) {
-      console.log('deleteLink', deleteLink);
-      console.log('delete link', $(deleteLink).prop('href'))
+      // console.log('deleteLink', deleteLink);
+      // console.log('delete link', $(deleteLink).prop('href'))
       $(deleteLink).click(function(e) {
           e.preventDefault();   // Blocks natural behavior of delete link (X)
 
@@ -93,7 +93,7 @@
     
 
 
-    createPost();
+    
 
     let postToAjax=function()
     {
@@ -101,18 +101,24 @@
         $("#posts-list-container>ul>li").each(function()
         {
             let self=$(this);
-            console.log('self',self)
-            let deletebutton = $(".delete-post-btn", self);
+            // console.log('self',self)
+            let deletebutton = $(".delete-post-button", self);
             // let editbutton = $(" .edit-post-btn",self);
-            console.log('****************** Delete button', deletebutton);
+            console.log('Delete button is:', deletebutton);
             deletePost(deletebutton);
             // editPost(editbutton);
 
             // get the post's id by splitting the id attribute
             let postId = self.prop('id').split("-")[1];
+            // console.log(postId)
             new PostComments(postId);
         })
     }
+
+    createPost();
+
     postToAjax();
+
+    
 }
 

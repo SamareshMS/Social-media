@@ -3,8 +3,7 @@
     <p>
         <% if((locals.user) && (locals.user.id == comment.user.id||post.user.id == locals.user.id)) {%>
             <small>
-              <!-- <span style="color: black;"><%= comment.id %></span> -->
-              <a href="/comments/destroy/<%= comment.id %>"><i class="far fa-trash-alt"></i></a>
+              <a class="delete-comment-button" href="/comments/destroy/<%= comment.id %>"><i class="far fa-trash-alt"></i></a>
             </small>
             <%}%> 
         <span id="displayed-comment"><%= comment.content %></span>

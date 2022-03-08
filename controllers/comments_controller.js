@@ -52,16 +52,16 @@ module.exports.create = async function (req, res) {
 module.exports.destroy = async function(req,res){
     try{
       let comment = await Comment.findById(req.params.id);
-      // console.log('@@@@@@@@@@@@@',req.params.id);
-
+      // console.log('Request.params',req.params.id);
+      console.log('Comment is :s',comment);
       
         let userId;
-          let post = Post.findById(comment.post);
+          let post = await Post.findById(comment.post);
             userId = post.user;
             if(comment.user == req.user.id || userId == req.user.id){
               let postId = comment.post;
               comment.remove();
-              post = Post.findByIdAndUpdate(postId, {$pull: {comments: req.params.id}});
+              post = await Post.findByIdAndUpdate(postId, {$pull: {comments: req.params.id}});
               await Like.deleteMany({likeable: comment._id, onModel: 'Comment'});
               // send the comment id which was deleted back to the views
             if (req.xhr){

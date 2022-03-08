@@ -58,7 +58,7 @@ module.exports.update = async (req,res) => {
 module.exports.signUp = function(req,res){
 
     if(req.isAuthenticated()){
-        return res.redirect('/users/profile');
+        return res.redirect('/');
     }
 
     res.render('user_sign_up', {
@@ -70,7 +70,7 @@ module.exports.signUp = function(req,res){
 module.exports.signIn = function(req,res){
 
     if(req.isAuthenticated()){
-        return res.redirect('/users/profile');
+        return res.redirect('/');
     }
 
     res.render('user_sign_in', {

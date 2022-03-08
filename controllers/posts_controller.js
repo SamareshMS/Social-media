@@ -65,6 +65,7 @@ module.exports.create = async function (req, res) {
 module.exports.destroy = async function (req, res) {
   try{
     let post = await Post.findById(req.params.id)
+    console.log(req.params.id)
       // .id converting the object id into string it is good while comparing
       if (post.user == req.user.id) {
 
