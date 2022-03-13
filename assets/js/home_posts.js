@@ -13,7 +13,7 @@
                 data: newPostForm.serialize(), // This converts the form data into json format
                 success: function(data) {
                     let newPost = newPostDom(data.data.post);
-                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!',newPost)
+                    // console.log('!!!!!!!!!!!!!!!!!!!!!!!!!',newPost)
                     // To display the post at the topmost part of posts list we prepend to posts-list
                     $('#posts-list-container>ul').prepend(newPost);
 

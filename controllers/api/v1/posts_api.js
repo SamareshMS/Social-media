@@ -32,7 +32,7 @@ module.exports.destroy = async (req, res) => {
                 message: "You cannot delete this post"
             });
         }
-    }catch{
+    }catch(err){
         return res.json(500, {
             message: "Internal Server Error"
         })

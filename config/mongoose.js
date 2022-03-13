@@ -1,6 +1,7 @@
+const env = require('./environment')
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/sodia_development');
+mongoose.connect(`mongodb://localhost/${env.db}`);
 
 const db = mongoose.connection;
 
