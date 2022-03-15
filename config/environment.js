@@ -1,4 +1,16 @@
+const fs = require('fs');
+const rfs = require('rotating-file-stream');
+const path = require('path');
 
+// it is a variable which defines where the log is stored
+const logDirectory = path.join(__dirname, '../production_logs');
+// if the production_logs file exists otherwise logDirectory will be created 
+fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
+
+const accessLogStream = rfs.createStream('access.log',{
+    interval: '1d',
+    path: logDirectory
+});
 
 const development = {
     name: 'development',
@@ -19,6 +31,10 @@ const development = {
     google_client_secret: "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",
     google_call_back_url: "http://localhost:8000/users/auth/google/callback",
     jwt_secret: 'tY6cm3EHfH56y0PCwGdhUyAODrdUjqqu',
+    morgan: {
+        mode: 'dev',
+        options: {stream: accessLogStream}
+    }
 }
 
 const production = {
@@ -40,6 +56,10 @@ const production = {
     google_client_secret: process.env.SODIA_GOOGLE_CLIENT_SECRET,
     google_call_back_url: process.env.SODIA_GOOGLE_CALL_BACK_URL,
     jwt_secret: process.env.SODIA_JWT_SECRET,
+    morgan: {
+        mode: 'combined',
+        options: {stream: accessLogStream}
+    }
 }
 
 module.exports = eval(process.env.SODIA_ENVIRONMENT) == undefined ? development : eval(process.env.SODIA_ENVIRONMENT);
