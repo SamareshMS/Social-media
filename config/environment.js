@@ -63,3 +63,4 @@ const production = {
 }
 
 module.exports = eval(process.env.SODIA_ENVIRONMENT) == undefined ? development : eval(process.env.SODIA_ENVIRONMENT);
+// module.exports = development
