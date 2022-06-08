@@ -12,6 +12,7 @@
         <link rel="icon" type="image/x-icon" href="/images/logo.png">
         <%- style %>
     </head>
+    
     <body>
         <%if(locals.user){%>
             <%- include('_header') %>    
@@ -23,9 +24,9 @@
             <%- body -%>
         </main>
 
-        <!-- <%if(locals.user){%> -->
-            <!-- <%- include('_footer'); %>    -->
-        <!-- <%}%> -->
+        <%if(locals.user){%>
+            <%- include('_footer'); %>   
+        <%}%>
         
 
         <%- script %>

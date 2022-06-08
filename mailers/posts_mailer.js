@@ -3,9 +3,9 @@ const nodeMailer = require('../config/nodemailer');
 
 exports.newPost = (post) => {
     let htmlString = nodeMailer.renderTemplate({post: post}, '/posts/new_post.ejs');
-    console.log('*****************',post);
+    // console.log('*****************',post);
     nodeMailer.transporter.sendMail({
-        from: 'mssamaresh34@gmail.com',
+        from: '',
         to: post.user.email,
         subject: 'New post Published!!!',
         html: htmlString,
