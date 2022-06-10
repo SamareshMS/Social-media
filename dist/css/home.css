@@ -1,0 +1,139 @@
+body {
+  color: white;
+  background-color: 9AD0EC;
+}
+
+#home-container {
+  height: auto;
+}
+
+#home-container #feed-posts {
+  width: 70%;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-bottom: 150px;
+}
+
+#home-container #user-friends {
+  padding: 10px;
+  width: 30%;
+  border-left: 1px solid lightgrey;
+  height: 100%;
+}
+
+#users-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#post-input {
+  width: 80%;
+}
+
+#posts-container {
+  margin-left: 100px;
+  margin-top: 20px;
+  overflow-y: visible;
+}
+
+#post-submit {
+  color: white;
+  border: none;
+  background: #3f2b96;
+  padding: 5px;
+  width: 54px;
+  margin-top: 10px;
+  border-radius: 6px;
+  -webkit-transition: color 0.5s, background-color 0.5s;
+  transition: color 0.5s, background-color 0.5s;
+}
+
+#post-submit:hover {
+  color: black;
+  background-color: 6dd5ed;
+}
+
+#post-input {
+  border-radius: 10px;
+}
+
+.toggle-like-button {
+  color: red;
+}
+
+.toggle-like-button:hover {
+  color: red;
+}
+
+.fa-trash-alt:before {
+  color: brown;
+}
+
+.user-shown {
+  color: #b91d73;
+  margin-left: 40px;
+}
+
+.friends-shown {
+  color: #A68DAD;
+}
+
+#delete-friend-button {
+  width: 130px;
+  padding: 3px;
+  background-color: rgba(255, 0, 0, 0.801);
+  border-radius: 8px;
+  -webkit-transition: 0.5s color, 0.5s background-color;
+  transition: 0.5s color, 0.5s background-color;
+}
+
+#delete-friend-button:hover {
+  background-color: #a8c0ff;
+  color: black;
+}
+
+.home-headers {
+  color: black;
+  margin-top: 20px;
+}
+
+#post-header {
+  margin-top: -10px;
+}
+
+#users {
+  height: 310px;
+  overflow-y: auto;
+}
+
+#users-friends {
+  height: auto;
+  overflow-y: auto;
+}
+
+#users-friends {
+  width: 20%;
+}
+
+#users {
+  width: 20%;
+}
+
+.friends-of-user {
+  margin-left: 44px;
+}
+
+#users h4 {
+  margin-left: 40px;
+}
+/*# sourceMappingURL=home.css.map */

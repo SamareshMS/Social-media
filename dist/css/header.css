@@ -1,0 +1,59 @@
+.header {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: 1572A1;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 20px;
+  height: 50px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0 20px;
+}
+
+#logo {
+  font-weight: bold;
+}
+
+.header-link {
+  color: white;
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+.sign-in-sign-up-links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  color: black;
+  width: 150px;
+}
+
+#logged-in {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 10px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#user-name {
+  margin-right: 2rem;
+}
+
+a:hover {
+  color: white;
+}
+/*# sourceMappingURL=header.css.map */
